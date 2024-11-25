@@ -8,8 +8,8 @@ class Restaurant(db.Model, SerializerMixin):
     __tablename__ = "restaurants"
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), nullable=False)  # Added max length
-    address = db.Column(db.String(255), nullable=False)  # Added max length
+    name = db.Column(db.String(255), nullable=False)
+    address = db.Column(db.String(255), nullable=False) 
 
     restaurant_pizzas = db.relationship(
         "RestaurantPizza",
@@ -26,8 +26,8 @@ class Pizza(db.Model, SerializerMixin):
     __tablename__ = "pizzas"
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), nullable=False)  # Added max length
-    ingredients = db.Column(db.String(255), nullable=False)  # Added max length
+    name = db.Column(db.String(255), nullable=False)
+    ingredients = db.Column(db.String(255), nullable=False)
 
     restaurant_pizzas = db.relationship(
         "RestaurantPizza",
