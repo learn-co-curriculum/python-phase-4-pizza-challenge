@@ -8,8 +8,8 @@ class Restaurant(db.Model, SerializerMixin):
     __tablename__ = "restaurants"
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable=False)
-    address = db.Column(db.String, nullable=False)
+    name = db.Column(db.String(255), nullable=False)  # Added max length
+    address = db.Column(db.String(255), nullable=False)  # Added max length
 
     restaurant_pizzas = db.relationship(
         "RestaurantPizza",
@@ -26,8 +26,8 @@ class Pizza(db.Model, SerializerMixin):
     __tablename__ = "pizzas"
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable=False)
-    ingredients = db.Column(db.String, nullable=False)
+    name = db.Column(db.String(255), nullable=False)  # Added max length
+    ingredients = db.Column(db.String(255), nullable=False)  # Added max length
 
     restaurant_pizzas = db.relationship(
         "RestaurantPizza",
@@ -59,13 +59,14 @@ class RestaurantPizza(db.Model, SerializerMixin):
     serialize_rules = ("-restaurant.restaurant_pizzas", "-pizza.restaurant_pizzas")
 
     @validates("price")
-    def validate_price(self, key, value):
+    def validate_price(self, _key, value):
         if not 1 <= value <= 30:
             raise ValueError("Price must be between 1 and 30")
         return value
 
     def __repr__(self):
         return f"<RestaurantPizza ${self.price}>"
+
 
 
 
